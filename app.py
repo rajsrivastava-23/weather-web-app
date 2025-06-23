@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 import requests
 
-app = Flask(_name_)
+app = Flask(__name__)
 
-API_KEY = "YOUR_API_KEY_HERE"  # ← Yahan apni OpenWeatherMap wali API key daal
+import os
+API_KEY = os.getenv("API_KEY")  # ← Yahan apni OpenWeatherMap wali API key daal
 
 def get_weather(city):
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
@@ -24,5 +25,5 @@ def index():
                 error = "City not found."
     return render_template("index.html", weather=weather, error=error)
 
-if _name_ == "_main_":
+if __name__ == "__bmain__":
     app.run(debug=True)
